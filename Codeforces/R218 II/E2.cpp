@@ -96,20 +96,26 @@ template <class T> bool isprime(T x)
 /* {END} */
 
 int n, k;
-pi  x[300100];
+int x[300100];
+int ord[300100];
 i64 mnv;
 int mni;
+
+bool doswap(const int &i, const int &j) {
+	return x[i] < x[j];
+}
 
 int main()
 {
 	cin >> n;
 	
-	for (int i = 0; i < n; i++) {
-		cin >> x[i].first;
-		x[i].second = i;
-	}
+	for (int i = 0; i < n; i++)
+		cin >> x[i];
 	
-	sort(x, x+n);
+	for (int i = 0; i < n; i++)
+		ord[i] = i;
+	
+	sort(ord, ord+n, doswap);
 	
 	cin >> k;
 	
@@ -118,21 +124,21 @@ int main()
 	i64 cur = 0;
 	
 	for (int i = 1; i < k; i++)
-		cur += i*(k-i)*abs(x[i].first-x[i-1].first);
+		cur += i*(k-i)*(x[ord[i]]-x[ord[i-1]]);
 	
 	for (int i = 1; i < k; i++)
-		fst += abs(x[i].first-x[0].first);
+		fst += (x[ord[i]]-x[ord[0]]);
 	
 	for (int i = 0; i < k-1; i++)
-		lst += abs(x[k-1].first-x[i].first);
+		lst += (x[ord[k-1]]-x[ord[i]]);
 	
 	mnv = cur;
 	mni = 0;
 	
 	for (int i = 1; i <= n-k; i++) {
 		cur -= fst;
-		fst = fst - 1LL*(k-1)*abs(x[i].first-x[i-1].first) + abs(x[i+k-1].first-x[i].first);
-		lst = lst + 1LL*(k-1)*abs(x[i+k-1].first-x[i+k-2].first) - abs(x[i+k-2].first-x[i-1].first);
+		fst = fst - 1LL*(k-1)*(x[ord[i]]-x[ord[i-1]]) + (x[ord[i+k-1]]-x[ord[i]]);
+		lst = lst + 1LL*(k-1)*(x[ord[i+k-1]]-x[ord[i+k-2]]) - (x[ord[i+k-2]]-x[ord[i-1]]);
 		cur += lst;
 		
 		if (mnv > cur) {
@@ -142,7 +148,7 @@ int main()
 	}
 	
 	for (int i = 0; i < k; i++)
-		cout << x[mni+i].second+1 << " ";
+		cout << ord[mni+i]+1 << " ";
 	
 //	ios_base::sync_with_stdio(false);
 //	freopen("input.txt", "r", stdin);		// needs disabled ios_base::sync_with_stdio(false);
