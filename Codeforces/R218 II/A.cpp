@@ -95,11 +95,27 @@ template <class T> bool isprime(T x)
 
 /* {END} */
 
-
+int n, k, res;
+int one[100];
+int two[100];
 
 int main()
 {
+	cin >> n >> k;
 	
+	for (int i = 0; i < n; i++)
+	{
+		int x;
+		cin >> x;
+		
+		one[i%k] += (x == 1);
+		two[i%k] += (x == 2);
+	}
+	
+	for (int i = 0; i < k; i++)
+		res += min(one[i], two[i]);
+	
+	cout << res;
 	
 //	ios_base::sync_with_stdio(false);
 //	freopen("input.txt", "r", stdin);		// needs disabled ios_base::sync_with_stdio(false);
