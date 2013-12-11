@@ -115,7 +115,7 @@ int main()
 		hc += (s[i] == 'C');
 	}
 	
-	i64 l = 0, r = 1e16;
+	i64 l = 0, r = 1e12+200;
 	
 	while (l <= r) {
 		i64 mid = (l+r)/2;
