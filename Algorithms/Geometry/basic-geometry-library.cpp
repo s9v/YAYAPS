@@ -4,7 +4,9 @@
  * Contains classes Point, Vector, Line, Segment
  * and some utility functions
  * 
- * NOTE: const &x, where possible, are skipped :(
+ * NOTES:
+ * 1. const &x, where possible, are skipped :(
+ * 2. There is no warranty in correctness of this library :(
  * 
  * (c) 2013 Sylap Aliyev <sylapaliyev@gmail.com>
  * 
@@ -72,7 +74,7 @@ class Line {
 		}
 	
 	public:
-		double A, B, C; // A*x + B*y = C
+		double A, B, C; // Ax + By = C
 		
 		Line(int A = 0, int B = 0, int C = 0) : A(A), B(B), C(C) {}
 		Line(Point first, Point second) {
@@ -108,6 +110,10 @@ class Line {
 			return fabs(Vector(A, B) ^ Vector(A, C)) / Vector(A, B).mtude();
 		}
 		
+		Point orthagonal(Point point) {
+			return (*this).intersection(Line(-B, A, (-B)*point.x + A*point.y));
+		}
+		
 		bool isparallel(Line other) {
 			return ((A*other.B - other.A*B) == 0);
 		}
@@ -121,11 +127,11 @@ class Line {
 		}
 		
 		bool coincide(Line other) {
-			if (isver(*this) != isver(other))
+			if (isver() != other.isver())
 				return false;
 			
-			if (isver(*this) && isver(other))
-				return finv(0) == other.finv(0)
+			if (isver() && other.isver())
+				return finv(0) == other.finv(0);
 			
 			return f(0) == other.f(0);
 		}
@@ -190,7 +196,7 @@ double rad2degree(double val) {
 }
 
 int main() {
-	
+	cout << "Welcome To basic-geometry-library.cpp"
 	
 	return 0;
 }
