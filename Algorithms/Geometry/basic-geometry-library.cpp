@@ -1,18 +1,9 @@
 /*
  * Basic Geometry Library
+ * Point, Vector, Line, Segment
  * 
- * Contains classes Point, Vector, Line, Segment
- * and some utility functions
- * 
- * NOTES:
- * 1. const &x, where possible, are skipped :(
- * 2. There is no warranty in correctness of this library :(
- * 
- * (c) 2013 Sylap Aliyev <sylapaliyev@gmail.com>
- * 
- * @name: Basic Geometry Library
- * @author: Sylap Aliyev
- * @date: 16/12/2013
+ * (c) 2013 Sylap Aliyev <sylapaliyev@gmail.com> 
+ * 16/12/2013
  * */
 
 #include <iostream>
@@ -110,8 +101,12 @@ class Line {
 			return fabs(Vector(A, B) ^ Vector(A, C)) / Vector(A, B).mtude();
 		}
 		
+		Line orthaline(Point point) {
+			return Line(-B, A, (-B)*point.x + A*point.y);
+		}
+		
 		Point orthagonal(Point point) {
-			return (*this).intersection(Line(-B, A, (-B)*point.x + A*point.y));
+			return (*this).intersection(orthaline(point));
 		}
 		
 		bool isparallel(Line other) {
@@ -158,26 +153,30 @@ class Segment {
 			C = A*start.x + B*start.y;
 		}
 		
-		Point get_start() {
+		Point getstart() {
 			return start;
 		}
 		
-		void set_start(Point new_start) {
+		void setstart(Point new_start) {
 			start = new_start;
 			A = end.y-start.y;
 			B = start.x-end.x;
 			C = A*start.x + B*start.y;
 		}
 		
-		Point get_end() {
+		Point getend() {
 			return end;
 		}
 		
-		void set_end(Point new_end) {
+		void setend(Point new_end) {
 			end = new_end;
 			A = end.y-start.y;
 			B = start.x-end.x;
 			C = A*start.x + B*start.y;
+		}
+		
+		Point mid() {
+			return Point((start.x+end.x)/2, (start.y+end.y)/2);
 		}
 		
 		double dist(Point point) {
@@ -196,7 +195,7 @@ double rad2degree(double val) {
 }
 
 int main() {
-	cout << "Welcome To basic-geometry-library.cpp"
+	cout << "Welcome To basic-geometry-library.cpp";
 	
 	return 0;
 }
