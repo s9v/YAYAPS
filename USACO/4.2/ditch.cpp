@@ -39,7 +39,7 @@ int edikarp() {
 			for (int i = 0; i < sz(g[u]); i++) {
 				int v = g[u][i];
 				
-				if (par[v] == -1 && c[u][v] > f[u][v]) {
+				if (par[v] == -1 && c[u][v]-f[u][v] > 0) {
 					q.push(v);
 					par[v] = u;
 				}
