@@ -35,11 +35,6 @@ int main()
 	for (int i = 1; i <= 10000000; i++)
 		ps[i] += ps[i-1];
 	
-	/*
-	for (int i = 1; i <= 11; i++)
-		cerr << i << " : " << ps[i]-ps[i-1] << "\n";
-	*/
-	
 	cin >> m;
 	
 	for (int i = 0; i < m; i++)
