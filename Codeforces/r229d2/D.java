@@ -1,6 +1,12 @@
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.*;
 import java.math.*;
+=======
+import java.util.Scanner;
+import java.util.*;
+import java.math.BigInteger;
+>>>>>>> 0af8961ec5948623f1ee4de948de5b9adbcc5859
 
 public class D
 {
