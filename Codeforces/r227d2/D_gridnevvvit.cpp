@@ -22,7 +22,7 @@
 
 #include <cassert>
 #include <cmath>
-#include <memory.h>
+#include <cmemory>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -62,8 +62,8 @@ const int N = 2000;
 
 int n, m, mt[N], used[N], u;
 
-vector < pt > edges;
-vector <int> g[N];
+vector<pt> edges;
+vector<int> g[N];
 
 bool read() {
 	if (scanf("%d %d", &n, &m) != 2)
@@ -96,20 +96,30 @@ inline bool kuhn(int s) {
 
 void solve() {
 	int tans = INF;
-	forn(it, n) {
-		int cnt = 0, ans = 0, other = 0;
+	
+	forn(it, n)
+	{
+		int cnt = 0;
+		int ans = 0;
+		int other = 0;
+		
 		forn(j, n)
 			g[j].clear(), mt[j] = -1;
-		forn(j, m) {
-			if (edges[j].ft == it || edges[j].sc == it) {
+		
+		forn(j, m)
+		{
+			if (edges[j].ft == it || edges[j].sc == it)
 				cnt++;
-			} else {
+			
+			else
+			{
 			 	g[edges[j].ft].pb(edges[j].sc);
 			 	other++;
 			}
 		}
 		
-		forn(i, n) {
+		forn(i, n)
+		{
 		 	u++;
 		 	kuhn(i);
 		}
@@ -121,7 +131,7 @@ void solve() {
 				tsz++;
 
 		ans += 2 * (n - 1) + 1 - cnt + other - tsz + (n - 1) - tsz;
-
+		
 		tans = min(tans, ans);
 	}
 
@@ -130,11 +140,14 @@ void solve() {
 
 int main()
 {
+
 #ifdef gridnevvvit
 	freopen("input.txt", "rt", stdin);
 	freopen("output.txt", "wt", stdout);
 #endif
+	
 	assert(read());
 	solve();
-	cerr << clock() << endl;
+	
+	// cerr << clock() << endl;
 }
