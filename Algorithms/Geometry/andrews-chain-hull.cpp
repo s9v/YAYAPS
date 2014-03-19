@@ -5,53 +5,69 @@
  * (c) 2013 Sylap Aliyev <sylapaliyev@gmail.com>
  * 17/12/2013
  * */
-
 #include <iostream>
+#include <cstdio>
 #include <algorithm>
-#include <cmath>
-#include <cassert>
-#include <stack>
-#include <deque>
-#define  DBG(X)		cerr << #X << " : " << X << "\n"
 using namespace std;
+typedef long long llint;
 
-class Point {
-	public:
-		double x, y;
+struct Point {
+	llint x, y;
+	bool f;
+	void read() {
+		//cin >> x >> y;
+		scanf("%I64d %I64d", &x, &y);
 		
-		Point(double x = 0, double y = 0) : x(x), y(y) {}
+	};
+	bool operator<(Point other) const {
+		return x < other.x || (x == other.x && y < other.y);
+	}
 };
 
-class Vector {
-	public:
-		double x, y;
-		
-		Vector(Point origin, Point point) : x(point.x-origin.x), y(point.y-origin.y) {}
-		double operator ^(Vector other) {
-			return x*other.y - other.x*y;
-		}
-};
+llint cross(Point a, Point b, Point c) {
+	return (b.x-a.x)*(c.y-a.y) - (c.x-a.x)*(b.y-a.y);
+}
 
-const int MAXN = 1e5;
-int n;
-Point p[MAXN];
-deque<Point> hull;
+int n, m;
+Point p[200000];
+Point s[200000]; int top;
 
-bool cmp(const Point &a, const Point &b) { return a.x < b.x || (a.x == b.x && a.y < b.y); }
-
-void andrey(int n, Point *p,  hull) {
-	sort(p, p+n, cmp);
+void andrewchain() {
+	sort(p, p+n);
 	
+	for (int i = 0; i < n; i++) {
+		while (top >= 2 && cross(s[top-2], s[top-1], p[i]) < 0) top--;
+		s[top++] = p[i];
+	}
+	top--;
 	
+	for (int i = n-1, tmp = top; i >= 0; i--) {
+		while (top >= tmp+2 && cross(s[top-2], s[top-1], p[i]) < 0) top--;
+		s[top++] = p[i];
+	}
+	top--;
 }
 
 int main() {
 	cin >> n;
 	
 	for (int i = 0; i < n; i++)
-		cin >> p[i].x >> p[i].y;
+		p[i].read();
 	
-	andrey(n, p, hull);
+	cin >> m;
+	for (int i = n; i < n+m; i++)
+		p[i].read(), p[i].f = 1;
 	
+	n += m;
+	
+	andrewchain();
+	
+	for (int i = 0; i < top; i++)
+		if (s[i].f) {
+			cout << "NO";
+			return 0;
+		}
+	
+	cout << "YES";
 	return 0;
 }
