@@ -1,6 +1,4 @@
-/*
- * 10080 - Gopher II
- * */
+// 10080 - Gopher II
 
 #include <iostream>
 #include <cmath>

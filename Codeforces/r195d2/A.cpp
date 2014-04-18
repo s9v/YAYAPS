@@ -33,8 +33,8 @@
 # define  FILL(X, A)	memset((X), (A), sizeof(X))
 # define  minof(X)		min_element(all(X))-X.begin()
 # define  maxof(X)		max_element(all(X))-X.begin()
-# define  square(X)		((X)*(X))
-# define  cube(X)		((X)*(X)*(X))
+# define  square(X)		(X)*(X)
+# define  cube(X)		(X)*(X)*(X)
 
 # define  FOR(i, a, b)	for (int i=a; i<b; i++)
 # define  FORD(i, a, b)	for (int i=a-1; i>=b; i--)
@@ -95,11 +95,38 @@ template <class T> bool isprime(T x)
 
 /* {END} */
 
-
+i64 x,y;
+i64 xb, yb;
+i64 xc, yc;
 
 int main()
 {
+	cin >> x >> y;
 	
+	if (x > 0 && y > 0) {
+		xb = 0;
+		yb = y+x;
+		xc = x+y;
+		yc = 0;
+	} else if (x < 0 && y < 0) {
+		xb = x+y;
+		yb = 0;
+		xc = 0;
+		yc = y+x;
+	} else if (x > 0 && y < 0) {
+		xb = 0;
+		yb = y-x;
+		xc = x-y;
+		yc = 0;
+	} else if (x < 0 && y > 0) {
+		xb = x-y;
+		yb = 0;
+		xc = 0;
+		yc = y-x;
+	}
+	
+	cout << xb << " " << yb << " ";
+	cout << xc << " " << yc << "\n";
 	
 //	ios_base::sync_with_stdio(false);
 //	freopen("input.txt", "r", stdin);		// needs disabled ios_base::sync_with_stdio(false);

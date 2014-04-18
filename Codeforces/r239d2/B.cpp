@@ -29,10 +29,11 @@
 #define  ln(X)			(int)(X).length()
 #define  square(X)		((X)*(X))
 #define  cube(X)		((X)*(X)*(X))
-#define  forn(i, n)		for (int i = 0; i < int(n); i++)
-#define  fore(i, a, b)	for (int i = int(a); i <= int(b); i++)
-#define  ford(i, n)		for (int i = int(n-1); i >= 0; i--)
-#define  foreach(it, a)	for(__typeof((a).begin()) it = (a).begin(); it != (a).end(); it++)
+#define  forn(i, n)  for (int i = 0; i < int(n); i++)
+#define  forr(i, n)  for (int i = int(n - 1); i >= 0; i--)
+#define  fora(i, a, b)  for (int i = int(a); i <= int(b); i++)
+#define  forb(i, a, b)  for (int i = int(a); i >= int(b); i--)
+#define  fore(it, a)	for(__typeof((a).begin()) it = (a).begin(); it != (a).end(); it++)
 #define  dbg(vari) cerr << #vari << " = " << (vari) << endl;
 
 //time_t st = clock();
@@ -64,12 +65,35 @@ template <class T> bool isprime(T x) {
 
 /* { END } */
 
+string s1;
+string s2;
 
+int cnt1[26];
+int cnt2[26];
+
+int res;
 
 int main()
 {
+	cin >> s1;
+	cin >> s2;
 	
+	for (int i = 0; i < ln(s1); i++)
+		cnt1[s1[i]-'a']++;
 	
+	for (int i = 0; i < ln(s2); i++)
+		cnt2[s2[i]-'a']++;
+	
+	for (int i = 0; i < 26; i++)
+	if (cnt1[i] == 0 && cnt2[i] > 0)
+	{
+		cout << -1;
+		return 0;
+	}
+	else
+		res += min(cnt1[i], cnt2[i]);
+	
+	cout << res;
 	
 //	ios_base::sync_with_stdio(false);
 //	freopen("input.txt", "r", stdin);		// needs disabled ios_base::sync_with_stdio(false);
