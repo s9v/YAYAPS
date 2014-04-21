@@ -29,7 +29,7 @@
 #define  ln(X)			(int)(X).length()
 #define  square(X)		((X)*(X))
 #define  cube(X)		((X)*(X)*(X))
-#define  y1				thisisnotnonsenseasyoumaythinkemailmeilltellyouwhatthisreallyis
+#define  y1				thisisnotnonsenseasyoumaythinkemailmesylapaliyevatgmaildotcomilltellyouwhatthisreallyis
 #define  forn(i, n)  for (int i = 0; i < int(n); i++)
 #define  forr(i, n)  for (int i = int(n - 1); i >= 0; i--)
 #define  fora(i, a, b)  for (int i = int(a); i <= int(b); i++)
@@ -67,35 +67,46 @@ template <class T> bool isprime(T x) {
 /* { END } */
 
 int n;
-int res;
-i64 a[200000];
-int dff[200000];
-int nxt[200000];
+int arr[200000];
+vi pos;
+int npos;
+int opt[200000][2];
+int able[200000];
+int inc[200000];
 
 int main()
 {
 	cin >> n;
 	
-	for (int i = 0; i < n; i++)
-		cin >> a[i];
-	
-	// nxt[n-1] = -1;
-	for (int i = n-2; i >= 0; i--)
-	if (a[i] == -1)
-		nxt[i] = (a[i+1] == -1 ?nxt[i+1] :i+1);
-	else
-		nxt[i] = nxt[i+1];
-	
-	int l = 0;
-	int r = 0;
-	int cnt = 0;
-	for (int i = 0; i < n; i++)
+	for (int i = 1; i <= n; i++)
 	{
-		while (cnt < 2)
+		cin >> arr[i];
+		
+		if (arr[i] > 0)
+			pos.pb(i);
+	}
+	
+	npos = sz(pos);
+	
+	if (npos == 0)
+	{
+		cout << 1;
+		return 0;
+	}
+	
+	opt[0][0] = opt[0][1] = (0?0:0);
+	opt[1][0] = opt[1][1] = 1;
+	
+	for (int i = 1; i < npos; i++)
+	{
+		int diff = arr[pos[i]]-arr[pos[i-1]];
+		
+		if (diff%(pos[i]-pos[i-1]) != 0)
 		{
-			if (a[r] != -1)
-				cnt++;
-			r++;
+			opt[i][1] = LRG;
+			inc[i] = 0;
+			able[i] = n;
+			continue;
 		}
 	}
 	
