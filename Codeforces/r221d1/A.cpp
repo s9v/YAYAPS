@@ -38,13 +38,16 @@ int main()
 	}
 	
 	int temp = 0;
-	for (int i = ln(s)-1; i >= 0; i--)
+	for (int i = 0; i < ln(s); i++)
 		temp *= 10,
 		temp += s[i]-'0',
 		temp %= 7;
 	
+	temp *= 10000;
+	temp %= 7;
+	
 	cout << s;
-	 cout << suffix[(7-temp)%7];
+	cout << suffix[(7-temp)%7];
 	
 	return 0;
 }
