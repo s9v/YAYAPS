@@ -1,3 +1,6 @@
+// 1701. Ostap and Partners
+// DSU solution
+
 #include <iostream>
 #include <cassert>
 #include <algorithm>
@@ -61,18 +64,6 @@ int main()
 				cout << "Impossible after " << foo+1 << " statements";
 				return 0;
 			}
-			//~ else
-			//~ {
-				//~ cerr << "In the same set / Alizwell\n";
-				//~ cerr << "par →  ";
-				//~ for (int i = 0; i < n; i++)
-					//~ cerr << wset.par[i] << " ";
-				//~ cerr << "\n";
-				//~ cerr << "dff →  ";
-				//~ for (int i = 0; i < n; i++)
-					//~ cerr << wset.dff[i] << " ";
-				//~ cerr << "\n";
-			//~ }
 		}
 		else
 		{
@@ -85,18 +76,6 @@ int main()
 				cout << "Impossible after " << foo+1 << " statements";
 				return 0;
 			}
-			//~ else
-			//~ {
-				//~ cerr << "Minioned / Alizwell\n";
-				//~ cerr << "par →  ";
-				//~ for (int i = 0; i < n; i++)
-					//~ cerr << wset.par[i] << " ";
-				//~ cerr << "\n";
-				//~ cerr << "dff →  ";
-				//~ for (int i = 0; i < n; i++)
-					//~ cerr << wset.dff[i] << " ";
-				//~ cerr << "\n";
-			//~ }
 		}
 	}
 	
