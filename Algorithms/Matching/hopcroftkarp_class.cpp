@@ -83,6 +83,7 @@ class HopcroftCarp {
 			gr[v].push_back(u);
 		}
 		void max_matching() {
+			matching = 0;
 			fill(matchingL, matchingL+V1, -1);
 			fill(matchingR, matchingR+V2, -1);
 
